@@ -9,8 +9,7 @@ d = {
 	"se": (-1, 1, 0),
 }
 for w in open("input").read().strip().split(","):
-	m = d[w]
-	p = (p[0] + m[0], p[1] + m[1], p[2] + m[2])
+	p = [a + b for a, b in zip(p, d[w])]
 	l = max(map(abs, p) + [l])
 print max(map(abs, p))
 print l
