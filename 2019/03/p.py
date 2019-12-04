@@ -1,7 +1,5 @@
 g = {}
-dist = 9e99
-length = 9e99
-
+dist = length = 9e99
 for n, line in enumerate(open("input")):
     x = y = l = 0
     for w in line.split(","):
@@ -13,12 +11,9 @@ for n, line in enumerate(open("input")):
             y += dy
             l += 1
             if n == 0:
-                if not (x,y) in g:
-                    g[x,y] = l
+                if not (x,y) in g: g[x,y] = l
             else:
                 if (x,y) in g:
                     dist = min(dist, abs(x) + abs(y))
                     length = min(length, l + g[x,y])
-
-print dist
-print length
+print dist, length
