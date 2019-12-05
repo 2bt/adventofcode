@@ -1,4 +1,3 @@
-
 PARAM_COUNT = {
     1: 3,
     2: 3,
@@ -11,7 +10,7 @@ PARAM_COUNT = {
     99: 0,
 }
 
-def f(mem, id):
+def f(mem, input):
     pc = 0
     while 1:
         op = mem[pc] % 100
@@ -24,19 +23,18 @@ def f(mem, id):
             if mode % 10 == 0: x = mem[x]
             mode /= 10
             p.append(x)
-
         if   op == 1: mem[p[2]] = mem[p[0]] + mem[p[1]]
         elif op == 2: mem[p[2]] = mem[p[0]] * mem[p[1]]
-        elif op == 3: mem[p[0]] = id
-        elif op == 4: print mem[p[0]]
+        elif op == 3: mem[p[0]] = input
+        elif op == 4: output = mem[p[0]]
         elif op == 5:
             if mem[p[0]] != 0: pc = mem[p[1]]
         elif op == 6:
             if mem[p[0]] == 0: pc = mem[p[1]]
         elif op == 7: mem[p[2]] = mem[p[0]] < mem[p[1]]
         elif op == 8: mem[p[2]] = mem[p[0]] == mem[p[1]]
-        elif op == 99: break
+        elif op == 99: return output
 
 q = list(eval(open("input").read()))
-f(q * 1, 1)
-f(q * 1, 5)
+print f(q * 1, 1)
+print f(q * 1, 5)
