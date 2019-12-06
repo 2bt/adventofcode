@@ -18,7 +18,7 @@ def f(mem, input):
         pc += 1
         p = []
         for _ in range(PARAM_COUNT[op]):
-            p.append(mem[pc] if mode % 10 == 0 else pc)
+            p.append(pc if mode % 10 else mem[pc])
             pc += 1
             mode /= 10
         if   op == 1: mem[p[2]] = mem[p[0]] + mem[p[1]]
