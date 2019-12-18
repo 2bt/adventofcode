@@ -41,18 +41,53 @@ def in_cb(): return 0
 def out_cb(v):
     global s
     s += chr(v)
-vm = VM(mem, in_cb, out_cb)
+vm = VM(mem * 1, in_cb, out_cb)
 vm.run()
+#print s
+
+
+# crossings
 l = s.index("\n") + 1
-s = list(s)
+s = list(s + "." * l)
 a = 0
 for p in range(l, len(s) - l):
-    if "#" == s[p] == s[p - 1] == s[p + 1] == s[p + l] == s[p - l]:
-        s[p] = "O"
-        a += (p / l) * (p % l)
-print "".join(s)
+    if "#" == s[p] == s[p - 1] == s[p + 1] == s[p + l] == s[p - l]: a += (p / l) * (p % l)
 print a
 
+# extract path
+p = max(i for i, c in enumerate(s) if c in "<>v^")
+path = []
+d = "^>v<".index(s[p])
+s[p] = "#"
+while 1:
+    n = 0
+    while 1:
+        q = p + [-l, 1, l, -1][d]
+        if s[q] in ".\n": break
+        n += 1
+        p = q
+    if n > 0: path += [n]
+    for i in -1, 1:
+        dd = (d + i) % 4
+        q = p + [-l, 1, l, -1][dd]
+        if s[q] == "#":
+            d = dd
+            path += ["*RL"[i]]
+            break
+    else: break
+print ",".join(map(str,path))
+
+
+o = map(ord, """A,B,A,C,B,C,A,B,A,C
+R,6,L,10,R,8,R,8
+R,12,L,8,L,10
+R,12,L,10,R,6,L,10
+n
+""")
+
+def in_cb(): return o.pop(0)
+def out_cb(v):
+    if v > 127: print v
 mem[0] = 2
 vm = VM(mem, in_cb, out_cb)
 vm.run()
