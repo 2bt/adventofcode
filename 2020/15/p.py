@@ -1,5 +1,4 @@
 a = list(map(int, open("input").read().split(",")))
-#a = [0, 3, 6]
 d = { x:i for i, x in enumerate(a[:-1]) }
 x = a[-1]
 i = len(a) - 1
