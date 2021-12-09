@@ -1,6 +1,6 @@
 a = [10 if c == "\n" else int(c) for c in open("input").read()]
 w = a.index(10) + 1
-a = a + [10] * w
+a += [10] * w
 
 s = 0
 for i, x in enumerate(a):
