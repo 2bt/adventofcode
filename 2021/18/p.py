@@ -11,17 +11,16 @@ def add(x, y):
     x = x + y
     while 1:
         # explode
-        e = False
-        for i in range(0, len(x), 2):
-            if x[i + 1] != -1:
+        while 1:
+            for i in range(0, len(x), 2):
+                if x[i + 1] == -1: continue
                 for j in range(i + 2, len(x)):
                     if x[j] != -1: x[j] += x[i + 1]; break
                 for j in range(i - 1, -1, -1):
                     if x[j] != -1: x[j] += x[i]; break
                 x[i:i + 2] = 0, -1
-                e = True
                 break
-        if e: continue
+            else: break
         # split
         for i, k in enumerate(x):
             if k > 9:
