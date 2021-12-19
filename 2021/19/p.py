@@ -19,8 +19,7 @@ def sub(a, b):
     u, v, w = b
     return x - u, y - v, z - w
 
-aa = [ss.pop(0)]
-ps = aa[0]
+aa = [ps := ss.pop(0)]
 positions = [(0, 0, 0)]
 
 while aa:
@@ -45,4 +44,4 @@ while aa:
         ss.pop(j)
 
 print(len(ps))
-print(max(sum(map(abs, (sub(a, b)))) for a in positions for b in positions))
+print(max(sum(map(abs, sub(a, b))) for a in positions for b in positions))
