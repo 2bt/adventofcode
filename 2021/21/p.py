@@ -30,7 +30,7 @@ for x in range(3):
         for z in range(3): d[x + y + z + 3] += 1
 
 @cache
-def f(i, px, py, sx, sy):
+def f(px, py, sx, sy):
     w = [0, 0]
     pp = px
     ss = sx
@@ -39,8 +39,8 @@ def f(i, px, py, sx, sy):
         sx = ss + px + 1
         if sx >= 21: w[0] += v
         else:
-            ww = f(i ^ 1, py, px, sy, sx)
+            ww = f(py, px, sy, sx)
             w[0] += ww[1] * v
             w[1] += ww[0] * v
     return w
-print(max(f(0, q[0], q[1], 0, 0)))
+print(max(f(q[0], q[1], 0, 0)))

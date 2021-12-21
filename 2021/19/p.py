@@ -19,7 +19,8 @@ def sub(a, b):
     u, v, w = b
     return x - u, y - v, z - w
 
-aa = [ps := ss.pop(0)]
+ps = ss.pop(0)
+aa = [ps]
 positions = [(0, 0, 0)]
 
 while aa:
